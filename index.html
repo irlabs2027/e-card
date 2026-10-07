@@ -562,6 +562,9 @@
     </div>
 
     <!-- Audio Player Toggle -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
     <div class="audio-float" onclick="toggleAudio()" title="Mainkan Muzik">
         <span id="audioIcon">🎵</span>
     </div>
@@ -628,11 +631,18 @@
             alert("Nombor akaun berjaya disalin!");
         }
 
-        // Audio Toggle Mock
+        // Audio Toggle Implementation
         let isPlaying = false;
         function toggleAudio() {
+            const audio = document.getElementById('bgMusic');
+            if (isPlaying) {
+                audio.pause();
+                document.getElementById('audioIcon').innerText = '🎵';
+            } else {
+                audio.play().catch(e => console.log('Audio playback prevented by browser policy'));
+                document.getElementById('audioIcon').innerText = '⏸️';
+            }
             isPlaying = !isPlaying;
-            document.getElementById('audioIcon').innerText = isPlaying ? '⏸️' : '🎵';
         }
     </script>
 </body>
